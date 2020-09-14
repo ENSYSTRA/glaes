@@ -2,7 +2,7 @@ import glaes as gl
 import geokit as gk
 
 class WindTurbineExclusionSets(object):
-    
+
     @staticmethod
     def Holtinger2016_max(reg):
         """
@@ -22,11 +22,11 @@ class WindTurbineExclusionSets(object):
             - Airport public safety zones - 5100m buffer
             - Power grid( >110kV) - 250m buffer
             - National parks - 1000m buffer
-            - Natura 2000 - habitats directive sites 
+            - Natura 2000 - habitats directive sites
                 * Potentially
             - Natura 2000 - birds directive sites
             - Other protected areas
-                * Biosphere reserves, landscape protection areas, natural monuments and sites, 
+                * Biosphere reserves, landscape protection areas, natural monuments and sites,
             - Important birdlife areas
                 * Potentially
             - Major migration routes for wild animals
@@ -34,47 +34,47 @@ class WindTurbineExclusionSets(object):
             - Lakes (> 50 ha) - 1000m buffer
         """
         ec = gl.ExclusionCalculator(reg)
-        
+
         ##### do exclusions #####
         # "Areas above the alpine forest line
         ec.excludePrior("elevation_threshold", value=(1750, None) ) # alpine forest line assumed at 1750 m
-        
+
         # "maximum slope (degrees)"
         ec.excludePrior("slope_threshold", value=(11.3, None) )
-        
+
         # "water bodies"
         ec.excludePrior("river_proximity", value=0 )
         #ec.excludePrior("lake_proximity", value=0 ) # commented out since it is included late with a buffer
-        
+
         # "settlement areas - 1000m buffer"
         ec.excludePrior("settlement_proximity", value=(None, 1000) )
-        
+
         # "buildings outside of settlement areas - 750m buffer"
-        
+
         # "building land outside of settlement areas - 750m buffer"
-        
+
         # "built up areas - 300m buffer"
         # "  * industrial, commercial, and mining areas"
         ec.excludePrior("industrial_proximity", value=(None, 300) )
         ec.excludePrior("mining_proximity", value=(None, 300) )
-        
+
         # "railways - 300m buffer"
         ec.excludePrior("railway_proximity", value=(None, 300) )
-        
+
         # "motorways, primary, and secondary roads - 300m buffer"
         ec.excludePrior("roads_main_proximity", value=(None, 300) )
         ec.excludePrior("roads_secondary_proximity", value=(None, 300) )
-        
+
         # "airport public safety zones - 5100m buffer"
         ec.excludePrior("airport_proximity", value=(None, 5100) )
-        
+
         # "power grid( >110kV) - 250m buffer"
         ec.excludePrior("power_line_proximity", value=(None, 250) )
-        
+
         # "national parks - 1000m buffer"
         ec.excludePrior("protected_park_proximity", value=(None,1000) )
 
-        # "Natura 2000 - habitats directive sites" 
+        # "Natura 2000 - habitats directive sites"
         # "*potentially"
         ec.excludePrior("protected_habitat_proximity", value=0 )
 
@@ -82,7 +82,7 @@ class WindTurbineExclusionSets(object):
         ec.excludePrior("protected_bird_proximity", value=0 )
 
         # "Other protected areas"
-        # "*Biosphere reserves, landscape protection areas, natural monuments and sites, 
+        # "*Biosphere reserves, landscape protection areas, natural monuments and sites,
         #   protected habitats, and landscape section"
         ec.excludePrior("protected_biosphere_proximity", value=0 )
         ec.excludePrior("protected_landscape_proximity", value=0 )
@@ -96,7 +96,7 @@ class WindTurbineExclusionSets(object):
 
         # "lakes (> 50 ha) - 1000m buffer"
         ec.excludePrior("lake_proximity", value=(None,1000) )
-        
+
         # All done
         return ec
 
@@ -119,11 +119,11 @@ class WindTurbineExclusionSets(object):
             - Airport public safety zones - 5100m buffer
             - Power grid( >110kV) - 250m buffer
             - National parks - 2000m buffer
-            - Natura 2000 - habitats directive sites 
+            - Natura 2000 - habitats directive sites
                 * Potentially
             - Natura 2000 - birds directive sites
             - Other protected areas
-                * Biosphere reserves, landscape protection areas, natural monuments and sites, 
+                * Biosphere reserves, landscape protection areas, natural monuments and sites,
             - Important birdlife areas
                 * Potentially
             - Major migration routes for wild animals
@@ -134,49 +134,49 @@ class WindTurbineExclusionSets(object):
         """
 
         ec = gl.ExclusionCalculator(reg)
-        
+
         ##### do exclusions #####
         # "Areas above the alpine forest line
         ec.excludePrior("elevation_threshold", value=(1750, None) ) # alpine forest line assumed at 1750 m
-        
+
         # "maximum slope (8.5 degrees)"
         ec.excludePrior("slope_threshold", value=(8.5, None) )
-        
+
         # "water bodies"
         ec.excludePrior("river_proximity", value=0 )
         #ec.excludePrior("lake_proximity", value=0 ) # commented out since it is included late with a buffer
-        
+
         # "settlement areas - 1200m buffer"
         ec.excludePrior("settlement_proximity", value=(None, 1200) )
-        
+
         # "buildings outside of settlement areas - 750m buffer"
         # maybe I should apply OSM directly, here
-        
+
         # "building land outside of settlement areas - 750m buffer"
         # maybe I should apply OSM directly, here
-        
+
         # "built up areas - 300m buffer"
         # "  * industrial, commercial, and mining areas"
         ec.excludePrior("industrial_proximity", value=(None, 300) )
         ec.excludePrior("mining_proximity", value=(None, 300) )
-        
+
         # "railways - 300m buffer"
         ec.excludePrior("railway_proximity", value=(None, 300) )
-        
+
         # "motorways, primary, and secondary roads - 300m buffer"
         ec.excludePrior("roads_main_proximity", value=(None, 300) )
         ec.excludePrior("roads_secondary_proximity", value=(None, 300) )
-        
+
         # "airport public safety zones - 5100m buffer"
         ec.excludePrior("airport_proximity", value=(None, 5100) )
-        
+
         # "power grid( >110kV) - 250m buffer"
         ec.excludePrior("power_line_proximity", value=(None, 250) )
-        
+
         # "national parks - 2000m buffer"
         ec.excludePrior("protected_park_proximity", value=(None,2000) )
 
-        # "Natura 2000 - habitats directive sites" 
+        # "Natura 2000 - habitats directive sites"
         # "*potentially"
         ec.excludePrior("protected_habitat_proximity", value=0 )
 
@@ -184,7 +184,7 @@ class WindTurbineExclusionSets(object):
         ec.excludePrior("protected_bird_proximity", value=0 )
 
         # "Other protected areas"
-        # "*Biosphere reserves, landscape protection areas, natural monuments and sites, 
+        # "*Biosphere reserves, landscape protection areas, natural monuments and sites,
         #   protected habitats, and landscape section"
         ec.excludePrior("protected_biosphere_proximity", value=0 )
         ec.excludePrior("protected_landscape_proximity", value=0 )
@@ -201,7 +201,7 @@ class WindTurbineExclusionSets(object):
 
         # "lakes (> 50 ha) - 1750m buffer"
         ec.excludePrior("lake_proximity", value=(None,1750) )
-        
+
         # All done
         return ec
 
@@ -224,11 +224,11 @@ class WindTurbineExclusionSets(object):
             - Airport public safety zones - 5100m buffer
             - Power grid( >110kV) - 250m buffer
             - National parks - 3000m buffer
-            - Natura 2000 - habitats directive sites - 2000m buffer 
+            - Natura 2000 - habitats directive sites - 2000m buffer
                 * Potentially
             - Natura 2000 - burds directive sites - 2000m buffer
             - Other protected areas - 2000m buffer
-                * Biosphere reserves, landscape protection areas, natural monuments and sites, 
+                * Biosphere reserves, landscape protection areas, natural monuments and sites,
             - Important birdlife areas
                 * Potentially
             - Major migration routes for wild animals
@@ -237,49 +237,49 @@ class WindTurbineExclusionSets(object):
             - Lakes (> 50 ha) - 3000m buffer
         """
         ec = gl.ExclusionCalculator(reg)
-        
+
         ##### do exclusions #####
         # "Areas above the alpine forest line
         ec.excludePrior("elevation_threshold", value=(1750, None) ) # alpine forest line assumed at 1750 m
-        
+
         # "maximum slope (5.7 degrees)"
         ec.excludePrior("slope_threshold", value=(5.7, None) )
-        
+
         # "water bodies"
         ec.excludePrior("river_proximity", value=0 )
         #ec.excludePrior("lake_proximity", value=0 ) # commented out since it is included late with a buffer
-        
+
         # "settlement areas - 2000m buffer"
         ec.excludePrior("settlement_proximity", value=(None, 2000) )
-        
+
         # "buildings outside of settlement areas - 1000m buffer"
         # maybe I should apply OSM directly, here
-        
+
         # "building land outside of settlement areas - 1000m buffer"
         # maybe I should apply OSM directly, here
-        
+
         # "built up areas - 300m buffer"
         # "  * industrial, commercial, and mining areas"
         ec.excludePrior("industrial_proximity", value=(None, 300) )
         ec.excludePrior("mining_proximity", value=(None, 300) )
-        
+
         # "railways - 300m buffer"
         ec.excludePrior("railway_proximity", value=(None, 300) )
-        
+
         # "motorways, primary, and secondary roads - 300m buffer"
         ec.excludePrior("roads_main_proximity", value=(None, 300) )
         ec.excludePrior("roads_secondary_proximity", value=(None, 300) )
-        
+
         # "airport public safety zones - 5100m buffer"
         ec.excludePrior("airport_proximity", value=(None, 5100) )
-        
+
         # "power grid( >110kV) - 250m buffer"
         ec.excludePrior("power_line_proximity", value=(None, 250) )
-        
+
         # "national parks - 3000m buffer"
         ec.excludePrior("protected_park_proximity", value=(None,3000) )
 
-        # "Natura 2000 - habitats directive sites - 2000m buffer" 
+        # "Natura 2000 - habitats directive sites - 2000m buffer"
         # "*potentially"
         ec.excludePrior("protected_habitat_proximity", value=(None,2000) )
 
@@ -287,7 +287,7 @@ class WindTurbineExclusionSets(object):
         ec.excludePrior("protected_bird_proximity", value=(None,2000) )
 
         # "Other protected areas - 2000m buffer"
-        # "*Biosphere reserves, landscape protection areas, natural monuments and sites, 
+        # "*Biosphere reserves, landscape protection areas, natural monuments and sites,
         #   protected habitats, and landscape section"
         ec.excludePrior("protected_biosphere_proximity", value=(None,2000) )
         ec.excludePrior("protected_landscape_proximity", value=(None,2000) )
@@ -306,8 +306,117 @@ class WindTurbineExclusionSets(object):
 
         # "lakes (> 50 ha) - 30000m buffer"
         ec.excludePrior("lake_proximity", value=(None,3000) )
-        
+
         # All done
         return ec
+
+    @staticmethod
+    def Gusatu2020_StatusQuo(reg):
+        """
+        SOURCE: Gusatu2020
+
+        EXCLUSIONS:
+            - Telecommunication cables - 500m buffer
+            - Pipelines - 500m buffer
+            - Shipping routes
+            - Military areas
+            - Aggregate extration
+            - Oil and Gas installations - 500m buffer
+            - Marine Protected Areas
+            - Valuable and vulnerable areas
+            - Offhsore wind areas operational and authorised
+            - Offhsore wind scope areas
+            - Distance from coasline
+        """
+        ec = gl.ExclusionCalculator(reg)
+
+        ##### do exclusions #####
+        # # Telecommunication cables - 500m buffer
+        ec.excludePrior("telecommunication_cables_nordsea", value=(None, 500) )
+        ec.excludePrior("telecommunication_cables_germany", value=(None, 500) )
+        ec.excludePrior("telecommunication_cables_netherlands", value=(None, 500) )
+
+        # Pipelines - 500m buffer
+        ec.excludePrior("pipelines", value=(None, 500) ) # Emodnet Pipelines cables line within 500 m
+
+        # Shipping routes - Restricted - 0m Buffer
+        ec.excludePrior("shipping_routes_msp_germany", value=(0) )
+        ec.excludePrior("shipping_routes_germany", value=(0) )
+        ec.excludePrior("shipping_routes_netherlands", value=(0) )
+        ec.excludePrior("shipping_routes_norway_tss", value=(0) )
+        ec.excludePrior("shipping_routes_norway_tss_border", value=(0) )
+        ec.excludePrior("shipping_routes_norway_fairway", value=(0) )
+
+        # # Military areas - Restricted - 0m Buffer
+        ec.excludePrior("military_areas_netherlands", value=(0) )
+        ec.excludePrior("military_areas_germany", value=(0) )
+
+        # Aggregate extration - Restricted - 0m Buffer
+        ec.excludePrior("aggregate_extraction_eu", value=(0) )
+        ec.excludePrior("aggregate_extraction_netherlands", value=(0) )
+        ec.excludePrior("minerals_extraction", value=(0) )
+        ec.excludePrior("offshore_mine", value=(0) )
+
+        # Oil and Gas - 500m Buffer
+        ec.excludePrior("oil_and_gas_installations_eu", value=(None, 500) )
+        ec.excludePrior("oil_and_gas_installations_uk_1", value=(None, 500) )
+        ec.excludePrior("oil_and_gas_installations_uk_2", value=(None, 500) )
+        ec.excludePrior("oil_and_gas_installations_uk_3", value=(None, 500) )
+        ec.excludePrior("oil_and_gas_installations_nlog_drillholes", value=(None, 500) )
+        ec.excludePrior("oil_and_gas_installations_nlog_fields", value=(None, 500) )
+
+        # Marine Protected Areas - 0m Buffer
+        ec.excludePrior("marine_protected_areas", value=(0) )
+
+        # Valuable and vulnerable - 0m Buffer
+        ec.excludePrior("valuable_and_vunerable_marine_areas", value=(0) )
+
+        # Distance from coastline
+        ec.excludePrior("coastline", value=(None,20000))
+
+        #### do inclusions #####
+        # Offshore Wind Areas Operational & Authorised
+        ec.excludePrior("offhsore_wind_parks_authorised_&_operational", value=(0),mode='include' )
+        ec.excludePrior("offhsore_wind_parks_in_use_and_development", value=(0),mode='include' )
+        ec.excludePrior("offhsore_wind_parks_in_scotland", value=(0),mode='include' )
+
+        # # Offshore Wind Scoped Areas
+        ec.excludePrior("offhsore_wind_parks_application_in_nl", value=(0),mode='include' )
+        ec.excludePrior("offhsore_wind_parks_in_development_in_nl", value=(0),mode='include' )
+        ec.excludePrior("offhsore_wind_parks_in_development_near_coast_denmark", value=(0),mode='include')
+        ec.excludePrior("offhsore_wind_parks_in_development_jammerbugt_denmark", value=(0),mode='include')
+        ec.excludePrior("offhsore_wind_parks_in_development_norway", value=(0),mode='include' )
+
+
+        return ec
+
+    @staticmethod
+    def Gusatu2020_Designated(reg):
+        """
+        SOURCE: Gusatu2020
+
+        INCLUSIONS:
+            - Offhsore Operational and Authorised Area
+            - Offhosre Wind Scoping Areas
+        """
+        ec = gl.ExclusionCalculator(reg, initialValue=False)
+
+        ##### do inclusions #####
+
+        # Offshore Wind Areas Operational & Authorised
+        ec.excludePrior("offhsore_wind_parks_authorised_&_operational", value=(0),mode='include' )
+        ec.excludePrior("offhsore_wind_parks_in_use_and_development", value=(0),mode='include' )
+        ec.excludePrior("offhsore_wind_parks_in_scotland", value=(0),mode='include' )
+
+        # # Offshore Wind Scoping Areas
+        ec.excludePrior("offhsore_wind_parks_application_in_nl", value=(0),mode='include' )
+        ec.excludePrior("offhsore_wind_parks_in_development_in_nl", value=(0),mode='include' )
+        ec.excludePrior("offhsore_wind_parks_in_development_near_coast_denmark", value=(0),mode='include')
+        ec.excludePrior("offhsore_wind_parks_in_development_jammerbugt_denmark", value=(0),mode='include')
+        ec.excludePrior("offhsore_wind_parks_in_development_norway", value=(0),mode='include' )
+
+        # All done
+        return ec
+
 class ExclusionSets(object):
     Wind = WindTurbineExclusionSets()
